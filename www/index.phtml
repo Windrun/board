@@ -1,0 +1,91 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/board/style.css"/>
+    <title>Board</title>
+</head>
+<body>
+<div class="container">
+    <div class="container container-width board-h1-container"><h1>Board</h1></div>
+    <div class="container container-width board-1px-description-container">
+        <div class="container board-1px-description">
+            <p class="board-p">
+                Всем привет, рады видеть Вас на сайте нашего проекта "Board".
+                Здесь вы можете оставить ссылку на любой понравившийся Вам сайт или картинку,
+                чтобы поделиться ей с окружающими.
+            </p>
+            <p class="board-p">
+                Для сохранения ссылки выберите понравившийся свободный блок, кликните по нему,
+                во всплывающем окне укажите ссылку и описание, если требуется.
+            </p>
+            <p class="board-p board-ppp" title="This is my span's tooltip message!">
+                Все теперь ссылка сохранена на нашем сайте, и Вы можете поделиться нашим проектом с друзьями.
+                Давайте наполним его интересным контентом :)
+            </p>
+        </div>
+    </div>
+    <div class="container container-width">
+        <div id="selected-block" class="board-1px-sel-block">-</div>
+    </div>
+    <div class="container container-width">
+        <div class="container board-1px-container">
+            <?php $number = 0; ?>
+            <?php for ($i = 1; $i <= 100; $i++) : ?>
+                <div class="board-1px-row board-1px-row-<?php print $i ?>" data-row="<?php print $i ?>">
+                    <?php for ($j = 1; $j <= 100; $j++) : ?>
+                        <div class="board-1px-col board-1px-col-<?php print $j ?> board-1px-<?php print $i ?>-<?php print $j ?>"
+                             data-row="<?php print $i ?>"
+                             data-col="<?php print $j ?>"
+                             data-number="<?php print ++$number; ?>"
+                        >
+                            <?php $board_cell = $i . '_' . $j; ?>
+                            <?php if (isset($board_data['cells'][$board_cell])) : ?>
+                                <a
+                                    href="<?php print $board_data['cells'][$board_cell]['url'] ?>"
+                                    class="board-1px-a"
+                                    <?php print (isset($board_data['cells'][$board_cell]) ?
+                                        ' style="background-color: ' . $board_data['cells'][$board_cell]['color'] . ';" '
+                                        : ''
+                                    )
+                                    ?>
+                                    <?php print (isset($board_data['cells'][$board_cell]) ?
+                                        ' title="' . $board_data['cells'][$board_cell]['title'] . '" '
+                                        : ''
+                                    )
+                                    ?>
+                                ></a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+</div>
+<div class="container board-footer clearfix">
+    <div style="float:right;">
+        <p class="board-p">Copyright &copy;</p>
+    </div>
+</div>
+
+<div id="popup-bg" class="popup-bg hidden"></div>
+<div id="popup-container" class="container popup-container hidden">
+    <div id="popup" class="popup">
+        <div class="popup-header"></div>
+        <div class="popup-body">
+        </div>
+        <div class="popup-footer">
+            <div class="popup-controls clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/lib/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/lib/tooltipster-master/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.drawrpalette.js" defer></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/board/script.js"></script>
+
+</body>
+</html>
